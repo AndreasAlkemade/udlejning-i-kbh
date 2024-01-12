@@ -55,10 +55,10 @@ if len(selected_rows) > 0 and people > 0:
     st.write("Forventet månedlig leje per person:")
     col1, col2 = st.columns(2)  # Two columns for side by side display
     with col1:
-        rent_per_person_leje = (selected_rows['Leje'] * size / 12 / people).astype(int)
+        rent_per_person_leje = (selected_rows['Leje'] * size / 12 / people).style.format(precision=2)
         st.write("Lejebaseret metode:")
         st.dataframe(rent_per_person_leje, use_container_width=True)
     with col2:
-        rent_per_person_afkast = (selected_rows['Afkast'] / 100 * price / 12 / people).astype(int)
+        rent_per_person_afkast = (selected_rows['Afkast'] / 100 * price / 12 / people).style.format(precision=2)
         st.write("Afkastbaseret metode:")
-        st.dataframe(rent_per_person_leje, use_container_width=True)
+        st.dataframe(rent_per_person_afkast, use_container_width=True)
