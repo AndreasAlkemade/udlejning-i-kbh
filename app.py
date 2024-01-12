@@ -48,7 +48,7 @@ selected_indices = st.multiselect('Vælg relevante rækker til udregning', tabel
 selected_rows = tabel.loc[selected_indices]
 
 # Display selected rows
-st.write('Valgte leje- og afkastniveauer', selected_rows.style.format(precision=2))
+st.dataframe(selected_rows.style.format(precision=2), use_container_width=True)
 
 # Calculate and display the expected monthly rent per person
 if len(selected_rows) > 0 and people > 0:
