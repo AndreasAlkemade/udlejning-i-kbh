@@ -34,7 +34,7 @@ tabel.loc[21] = ["EDC", "Østerbro, Frederiksberg og Gentofte", "Tertiær", "Ful
 
 # show df
 st.title('Leje- og afkastdata for København')
-st.dataframe(tabel)
+st.dataframe(tabel, use_container_width=True)
 
 st.title('Beregn månedlig leje per person')
 
@@ -48,7 +48,7 @@ selected_indices = st.multiselect('Vælg relevante rækker til udregning', tabel
 selected_rows = tabel.loc[selected_indices]
 
 # Display selected rows
-st.write('Valgte leje- og afkastniveauer', selected_rows)
+st.write('Valgte leje- og afkastniveauer', selected_rows.style.format(precision=2))
 
 # Calculate and display the expected monthly rent per person
 if len(selected_rows) > 0 and people > 0:
@@ -57,14 +57,8 @@ if len(selected_rows) > 0 and people > 0:
     with col1:
         rent_per_person_leje = (selected_rows['Leje'] * size / 12 / people).astype(int)
         st.write("Lejebaseret metode:")
-        st.write(rent_per_person_leje)
+        st.dataframe(rent_per_person_leje, use_container_width=True)
     with col2:
         rent_per_person_afkast = (selected_rows['Afkast'] / 100 * price / 12 / people).astype(int)
         st.write("Afkastbaseret metode:")
-        st.write(rent_per_person_afkast)
-
-
-
-
-
-
+        st.dataframe(rent_per_person_leje, use_container_width=True)
