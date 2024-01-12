@@ -29,5 +29,9 @@ tabel.loc[19] = ["EDC", "Østerbro, Frederiksberg og Gentofte", "Primær", "Fuld
 tabel.loc[20] = ["EDC", "Østerbro, Frederiksberg og Gentofte", "Sekundær", "Fuldt udviklede ejendomme", 1650, 4.50]
 tabel.loc[21] = ["EDC", "Østerbro, Frederiksberg og Gentofte", "Tertiær", "Fuldt udviklede ejendomme", 1550, 4.75]
 
-st.title('Real Estate Data')
-st.write(tabel)
+# show df
+st.title('Leje- og afkastdata for København')
+st.dataframe(tabel, width=700, height=300)  # Adjust width and height as needed
+
+
+
