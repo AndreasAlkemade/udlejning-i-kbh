@@ -2,6 +2,9 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
+# Set page to wide mode
+st.set_page_config(layout="wide")
+
 # create an empty dataframe with column names "Mægler", "Placering", "Kvalitet", "Kategori", "Leje", "Afkast"
 tabel = pd.DataFrame(columns=["Mægler", "Placering", "Kvalitet", "Kategori", "Leje", "Afkast"])
 
@@ -50,13 +53,15 @@ st.write('Valgte leje- og afkastniveauer', selected_rows)
 # Calculate and display the expected monthly rent per person
 if len(selected_rows) > 0 and people > 0:
     st.write("Forventet månedlig leje per person:")
-    for method in ['Leje', 'Afkast']:
-        if method == 'Leje':
-            rent_per_person = selected_rows['Leje'] * size / 12 / people
-        else:
-            rent_per_person = selected_rows['Afkast'] / 100 * price / 12 / people
-        st.write(f"{method}baseret metode:")
-        st.write(rent_per_person)
+    col1, col2 = st.columns(2)  # Two columns for side by side display
+    with col1:
+        rent_per_person_leje = (selected_rows['Leje'] * size / 12 / people).astype(int)
+        st.write("Lejebaseret metode:")
+        st.write(rent_per_person_leje)
+    with col2:
+        rent_per_person_afkast = (selected_rows['Afkast'] / 100 * price / 12 / people).astype(int)
+        st.write("Afkastbaseret metode:")
+        st.write(rent_per_person_afkast)
 
 
 
