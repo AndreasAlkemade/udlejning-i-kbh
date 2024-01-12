@@ -35,9 +35,6 @@ st.dataframe(tabel, width=700, height=300)  # Adjust width and height as needed
 
 st.title('Real Estate Analysis Tool')
 
-# Display the table
-st.write(tabel)
-
 # User inputs
 price = st.number_input("Enter the price of the apartment:", min_value=0.0)
 size = st.number_input("Enter the size of the apartment in square meters:", min_value=0.0)
