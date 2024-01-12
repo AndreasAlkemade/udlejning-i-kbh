@@ -34,7 +34,7 @@ tabel.loc[21] = ["EDC", "Østerbro, Frederiksberg og Gentofte", "Tertiær", "Ful
 
 # show df
 st.title('Leje- og afkastdata for København')
-st.dataframe(tabel, width=1400, height=500)  # Adjust width and height as needed
+st.dataframe(tabel)
 
 st.title('Beregn månedlig leje per person')
 
