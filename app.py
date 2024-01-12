@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+
 
 # Set page to wide mode
 st.set_page_config(layout="wide")
@@ -62,3 +64,15 @@ if len(selected_rows) > 0 and people > 0:
         rent_per_person_afkast = (selected_rows['Afkast'] / 100 * price / 12 / people).astype(int)
         st.write("Afkastbaseret metode:")
         st.dataframe(rent_per_person_afkast, use_container_width=True)
+
+ # Plot the calculated rents
+    fig, ax = plt.subplots()
+    ax.bar(selected_rows.index, rent_per_person_leje, label='Lejebaseret')
+    ax.bar(selected_rows.index, rent_per_person_afkast, label='Afkastbaseret', alpha=0.7)
+    ax.set_xlabel('Valgt række til udregning')
+    ax.set_ylabel('Leje per person (kr)')
+    ax.set_title('Forventet månedlig leje per person')
+    ax.legend()
+
+    st.pyplot(fig)
+
