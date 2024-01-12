@@ -31,31 +31,31 @@ tabel.loc[21] = ["EDC", "Østerbro, Frederiksberg og Gentofte", "Tertiær", "Ful
 
 # show df
 st.title('Leje- og afkastdata for København')
-st.dataframe(tabel, width=700, height=300)  # Adjust width and height as needed
+st.dataframe(tabel, width=1000, height=300)  # Adjust width and height as needed
 
-st.title('Real Estate Analysis Tool')
+st.title('Beregn månedlig leje per person')
 
 # User inputs
-price = st.number_input("Enter the price of the apartment:", min_value=0.0)
-size = st.number_input("Enter the size of the apartment in square meters:", min_value=0.0)
-people = st.number_input("Enter the number of people:", min_value=1)
+price = st.number_input("Indtast lejlighedens pris (kr):", min_value=3000000)
+size = st.number_input("Indtast lejlighedens størrelse (m2):", min_value=50)
+people = st.number_input("Indtast antal personer:", min_value=1)
 
 # Allow the user to select rows
-selected_indices = st.multiselect('Select relevant rows', tabel.index)
+selected_indices = st.multiselect('Vælg relevante rækker til udregning', tabel.index)
 selected_rows = tabel.loc[selected_indices]
 
 # Display selected rows
-st.write('Selected Data', selected_rows)
+st.write('Valgte leje- og afkastniveauer', selected_rows)
 
 # Calculate and display the expected monthly rent per person
 if len(selected_rows) > 0 and people > 0:
-    st.write("Expected Monthly Rent per Person")
+    st.write("Forventet månedlig leje per person:")
     for method in ['Leje', 'Afkast']:
         if method == 'Leje':
             rent_per_person = selected_rows['Leje'] * size / 12 / people
         else:
             rent_per_person = selected_rows['Afkast'] / 100 * price / 12 / people
-        st.write(f"Method {method}:")
+        st.write(f"{method}baseret metode:")
         st.write(rent_per_person)
 
 
